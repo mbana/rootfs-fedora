@@ -1,0 +1,15 @@
+GRUB_TIMEOUT=1
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=false
+#GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="sysrq_always_enabled=1 nokaslr mitigations=off spectre_v2=off retbleed=off"
+GRUB_DISABLE_RECOVERY="false"
+GRUB_ENABLE_BLSCFG=true
+
+GRUB_TERMINAL_OUTPUT="gfxterm"
+GRUB_GFXMODE="2560x1600"
+GRUB_GFXPAYLOAD_LINUX="keep"
+# https://unix.stackexchange.com/a/31752
+# https://gist.github.com/davidalger/9ced8f2291a4c785065b606d6cfcc459#grub
+GRUB_FONT="ter-u24n.pf2"

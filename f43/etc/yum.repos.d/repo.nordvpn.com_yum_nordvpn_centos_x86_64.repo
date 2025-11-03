@@ -1,0 +1,4 @@
+[repo.nordvpn.com_yum_nordvpn_centos_x86_64]
+name=created by dnf config-manager from https://repo.nordvpn.com/yum/nordvpn/centos/x86_64
+baseurl=https://repo.nordvpn.com/yum/nordvpn/centos/x86_64
+enabled=1

@@ -1,0 +1,9 @@
+# https://www.madalin.me/howto/2024/340/Renaming-Network-Interface-in-Debian-by-MAC-Address.html
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="38:05:25:33:37:27", NAME="rtl"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="38:05:25:33:37:28", NAME="igc"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="38:05:25:33:37:29", NAME="sfp0"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="38:05:25:33:37:2a", NAME="sfp1"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="14:14:16:03:43:44", NAME="wlan1"
+# SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="ba:57:84:c5:1b:76", NAME="wlan1"
+#SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="e2:74:a3:c6:aa:47", NAME="wlan1"
+#SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="36:33:ba:47:61:15", NAME="wlan1"%
