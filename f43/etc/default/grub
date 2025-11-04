@@ -8,8 +8,10 @@ GRUB_DISABLE_RECOVERY="false"
 GRUB_ENABLE_BLSCFG=true
 
 GRUB_TERMINAL_OUTPUT="gfxterm"
-GRUB_GFXMODE="2560x1600"
+GRUB_GFXMODE="2560x1400"
 GRUB_GFXPAYLOAD_LINUX="keep"
 # https://unix.stackexchange.com/a/31752
 # https://gist.github.com/davidalger/9ced8f2291a4c785065b606d6cfcc459#grub
-GRUB_FONT="ter-u24n.pf2"
+# sudo cp -v /usr/share/grub/ter-u12n.pf2 /boot/grub2/fonts/
+#GRUB_FONT="ter-u24n.pf2"
+GRUB_FONT="/boot/grub2/fonts/ter-u12n.pf2"
