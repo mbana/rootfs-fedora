@@ -1,0 +1,8 @@
+# vim: ft shell:
+GRUB_DISABLE_SUBMENU="false"
+GRUB_CMDLINE_LINUX="sysrq_always_enabled=1"
+
+GRUB_TIMEOUT="1"
+
+GRUB_DEFAULT="saved"
+GRUB_SAVEDEFAULT="true"

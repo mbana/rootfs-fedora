@@ -1,3 +1,3 @@
-# `rootfs-fedora`
+# `rootfs`
 
-Root filesystem (`/`) of Fedora installation with some customisations.
+Root filesystem (`/`) of several distributions with some customisations.

@@ -1,0 +1,18 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+## / was on /dev/nvme0n1p7 during curtin installation
+#/dev/disk/by-uuid/54af97c2-9893-4b32-8104-58fa19334e44 / ext4 defaults,noatime 0 1
+#/dev/disk/by-uuid/56eb83bb-056c-412f-9203-043eaeb0a470 none swap sw 0 0
+## /boot/efi was on /dev/nvme0n1p1 during curtin installation
+#/dev/disk/by-uuid/EECA-0C53 /boot/efi vfat defaults 0 1
+
+UUID=54af97c2-9893-4b32-8104-58fa19334e44	/								ext4 			defaults,noatime	0	1
+UUID=56eb83bb-056c-412f-9203-043eaeb0a470	none							swap 			sw					0	0
+UUID=EECA-0C53								/boot/efi						vfat 			defaults			0	1
+
+mohamed.omar.bana@gmail.com:Documents		/home/mbana/Documents-Google	fuse.rclonefs	rw,nofail,_netdev,x-systemd.automount,args2env,vfs_cache_mode=writes,config=/home/mbana/.config/rclone/rclone.conf,cache_dir=/var/cache/rclone,allow_other,uid=1000,gid=1000	0	0
