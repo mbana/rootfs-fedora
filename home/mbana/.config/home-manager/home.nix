@@ -58,6 +58,10 @@
 
 
     pkgs.zsh
+    pkgs.zsh-autosuggestions
+    pkgs.zsh-syntax-highlighting
+    pkgs.zsh-history-substring-search
+
     pkgs.starship
     pkgs.atuin
 
@@ -136,17 +140,14 @@
     lfs.enable = true;
     settings = {
       user = {
-      name = "mbana";
-      email = "mohamed.omar.bana@gmail.com";
+        name = "Mohamed Bana";
+        email = "mohamed.omar.bana@gmail.com";
+        signingkey = "~/.ssh/id_ed25519.pub";
       };
       extraConfig = {
         init = {
           defaultBranch = "main";
         };
-        # Sign all commits using ssh key
-        user.signingkey = "~/.ssh/id_ed25519.pub";
-        gpg.format = "ssh";
-        commit.gpgsign = true;
         color = {
           ui = "true";
           advice = "true";
@@ -155,7 +156,7 @@
         core = {
           ignorecase = "false";
           hideDotFiles = "false";
-          editor = "code --wait --new-window";
+          # editor = "code --wait --new-window";
         };
         ignores = [
           # Ignore these folders
@@ -164,6 +165,9 @@
           ".tmp"
           ".tmp/"
         ];
+        # Sign all commits using ssh key
+        gpg.format = "ssh";
+        commit.gpgsign = true;
       };
       commit = {
         verbose = true;
@@ -199,6 +203,20 @@
       fd = "fd --follow --exclude /proc --exclude /sys --exclude $(go env GOPATH)";
       # rg = "rg --follow --glob '!{/proc,/sys,$(go env GOPATH),**/.git/*,**/*.rs}'";
       rg = "rg --follow --glob '!{/proc,/sys,$(go env GOPATH),.git,*.rs}'";
+    };
+    history = {
+      append = true;
+      expireDuplicatesFirst = true;
+      findNoDups = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      saveNoDups = true;
+
+      path = "${config.programs.zsh.dotDir}/.zsh_history";
+      save = 1000000000;
+
+      share = false;
+      size = 1000000000;
     };
   };
 
@@ -241,6 +259,7 @@
 
   programs.atuin = {
     enable = true;
+    enableZshIntegration = true;
     flags = [ "--disable-up-arrow" ]; # or --disable-ctrl-r
   };
 }
