@@ -135,11 +135,14 @@
     enable = true;
     lfs.enable = true;
     settings = {
-      userName = "mbana";
-      userEmail = "mohamed.omar.bana@gmail.com";
-      # signingKey = "A0DC 65A1 9C6C 1BA2 5B45  3E0B 4BFB 6A8B 9C27 3C87";
+      user = {
+      name = "mbana";
+      email = "mohamed.omar.bana@gmail.com";
+      };
       extraConfig = {
-        init.defaultBranch = "main";
+        init = {
+          defaultBranch = "main";
+        };
         # Sign all commits using ssh key
         user.signingkey = "~/.ssh/id_ed25519.pub";
         gpg.format = "ssh";
@@ -161,22 +164,26 @@
           ".tmp"
           ".tmp/"
         ];
-        url = {
-          # Use SSH instead of HTTPS for GitHub and GitLab
-
-        };
       };
       commit = {
         verbose = true;
       };
+      # Use SSH instead of HTTPS for GitHub and GitLab
+      url = {
+        "git@github.com:" = {
+          insteadOf = [
+            "https://github.com/"
+          ];
+        };
+      };
+      url = {
+        "git@gitlab.com:" = {
+          insteadOf = [
+            "https://gitlab.com/"
+          ];
+        };
+      };
     };
-
-    extraConfig = ''
-      [url "git@github.com:"]
-          insteadOf = https://github.com/
-      [url "git@gitlab.com:"]
-          insteadOf = https://gitlab.com/
-    '';
   };
 
   programs.zsh = {
