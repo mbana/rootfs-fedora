@@ -1,0 +1,45 @@
+[Version]
+signature   = "$WINDOWS NT$"
+Class       = Extension
+ClassGuid   = {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+Provider    = %ManufacturerName%
+ExtensionId = {34284750-2704-44d0-8631-cc3435db63f6}
+CatalogFile = mepoptinext.cat
+DriverVer   = 06/04/2024, 1.0.0.1
+PnPLockDown = 1
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[Manufacturer]
+%MEP_OPTIN%=MEP_OPTIN,NTarm64
+
+[MEP_OPTIN.NTarm64]
+
+%Camera_EXT%=Camera_EXT, USB\VID_1BCF&PID_28C4&MI_00
+
+
+[Camera_EXT]
+; Camera ID
+
+[Camera_EXT.Interfaces]
+AddInterface = %KSCATEGORY_CAPTURE%,Global,Camera_EXT.MsEffect
+AddInterface = %KSCATEGORY_VIDEO_CAMERA%,Global,Camera_EXT.MsEffect
+AddInterface = %KSCATEGORY_VIDEO%,Global,Camera_EXT.MsEffect
+
+[Camera_EXT.MsEffect]
+AddReg=Camera_EXT.MsEffect.AddReg
+ 
+[Camera_EXT.MsEffect.AddReg]
+HKR,,FSMEnableMsEffects,0x00010001,1
+
+
+[Strings]
+ManufacturerName = "Emdoor"
+MEP_OPTIN = "Emdoor"
+DiskName = "MEP Camera Opt In Ext Inf Installation"
+Camera_EXT = "Camera ID for MEP Opt In"
+
+KSCATEGORY_VIDEO_CAMERA = "{E5323777-F976-4f5b-9B55-B94699C46E44}"
+KSCATEGORY_CAPTURE = "{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_VIDEO = "{6994AD05-93EF-11D0-A3CC-00A0C9223196}"

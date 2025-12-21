@@ -1,0 +1,177 @@
+
+[Version]
+Signature="$Windows NT$"
+Class=Biometric
+ClassGuid={53D29EF7-377C-4D14-864B-EB3A85769359}
+Provider=%ManufacturerName%
+CatalogFile=RtsMocWbdi64.cat
+DriverVer = 06/06/2024,10.0.22621.130
+PnpLockdown =1
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTARM64.10.0...22000, NTARM64.10.0...17134
+
+[Standard.NTARM64.10.0...22000]
+%DeviceName%=Biometric_Install, USB\VID_3274&PID_9001
+%DeviceName%=Biometric_Install, USB\VID_3274&PID_9003
+
+[Standard.NTARM64.10.0...17134]
+%DeviceName%=Biometric_Install_WIN10, USB\VID_3274&PID_9001
+%DeviceName%=Biometric_Install_WIN10, USB\VID_3274&PID_9003
+
+[SourceDisksFiles]
+MicroArrayMocWbdi.dll=1
+MicroArrayMocAdapter.dll=1
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[Biometric_Install.NT]
+Include=WUDFRD.inf
+Needs=WUDFRD.NT
+CopyFiles=UMDriverCopy, WinBioAdapterCopy
+
+[Biometric_Install.NT.hw]
+Include=WUDFRD.inf
+Needs=WUDFRD.NT.HW
+AddReg=Biometric_Device_AddReg
+AddReg=DriverPlugInAddReg, DatabaseAddReg
+
+[Biometric_Install.NT.Services]
+Include=WUDFRD.inf
+Needs=WUDFRD.NT.Services
+
+[Biometric_Install.NT.CoInstallers]
+AddReg=CoInstallers_AddReg
+
+[Biometric_Install.NT.Wdf]
+UmdfDispatcher=NativeUSB
+UmdfService=RtsMocWbdi,RtsMocWbdi_Install
+UmdfServiceOrder=RtsMocWbdi
+UmdfHostProcessSharing = ProcessSharingDisabled
+
+[AutologgerProviderInstallSection]
+Enabled=1
+EnableLevel=255
+EnablePropety=0
+MatchAllKeyword=0
+MatchAnyKeyword=0xffffffff
+
+[AddAutologgerInstallSection] 
+Start=1
+BufferSize=4
+ClockType=1
+FileName=%%DriverData%%\Realtek\RtsMocWbdi.etl
+FileMax=5
+FlushTimer=1
+LogFileMode=2
+MaxFileSize=20
+MaximumBuffers=640
+MinimumBuffers=128
+AddAutoLoggerProvider={F7B941EE-EA5A-4984-927B-8DF3218DE3C8}, AutologgerProviderInstallSection
+AddAutoLoggerProvider={E1A44DA1-D546-4FF9-A1C7-A4F4FED9A9A4}, AutologgerProviderInstallSection
+
+[UpdateAutologgerInstallSection]
+AddAutoLoggerProvider={F7B941EE-EA5A-4984-927B-8DF3218DE3C8}, AutologgerProviderInstallSection
+AddAutoLoggerProvider={E1A44DA1-D546-4FF9-A1C7-A4F4FED9A9A4}, AutologgerProviderInstallSection
+
+[Biometric_Install.NT.Events] 
+AddAutoLogger="RtsMocWbdi", {9DB83BCD-540D-4ADC-8BF2-35CDBFC629F5}, AddAutologgerInstallSection
+UpdateAutoLogger="RtsMocWbdi", UpdateAutologgerInstallSection
+
+[Biometric_Install_WIN10.NT]
+CopyFiles=UMDriverCopy, WinBioAdapterCopy
+
+[Biometric_Install_WIN10.NT.hw]
+AddReg=Biometric_Device_AddReg
+AddReg=DriverPlugInAddReg, DatabaseAddReg
+
+[Biometric_Install_WIN10.NT.Services]
+AddService=WUDFRd,0x000001fa,WUDFRD_ServiceInstall
+
+[Biometric_Install_WIN10.NT.CoInstallers]
+AddReg=CoInstallers_AddReg
+
+[Biometric_Install_WIN10.NT.Wdf]
+UmdfDispatcher=NativeUSB
+UmdfService=RtsMocWbdi,RtsMocWbdi_Install
+UmdfServiceOrder=RtsMocWbdi
+UmdfHostProcessSharing = ProcessSharingDisabled
+
+[WUDFRD_ServiceInstall]
+DisplayName = %WudfRdDisplayName%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\WUDFRd.sys
+LoadOrderGroup = Base
+
+[RtsMocWbdi_Install]
+UmdfLibraryVersion=2.15.0 
+ServiceBinary=%12%\UMDF\MicroArrayMocWbdi.dll
+
+[Biometric_Device_AddReg]
+HKR,,"DeviceCharacteristics",0x10001,0x0100
+HKR,,"Security",,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"
+HKR,,"Exclusive",0x10001,1
+HKR,"WDF","WdfDirectedPowerTransitionEnable",0x00010001,1
+
+[DriverPlugInAddReg]
+HKR,WinBio\Configurations,DefaultConfiguration,,"0"
+HKR,WinBio\Configurations,VirtualSecureConfiguration,0x00010001,0x00000001
+HKR,WinBio\Configurations,SecureFingerprint,0x00010001,0x00000001
+
+HKR,WinBio\Configurations\0,SensorMode,0x00010001,0x00000002
+HKR,WinBio\Configurations\0,SystemSensor,0x00010001,0x00000001
+HKR,WinBio\Configurations\0,EngineAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\0,SensorAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\0,StorageAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\0,DatabaseId,,"90508806-8172-4C04-B03F-DCB28DBEA104"
+
+HKR,WinBio\Configurations\1,SensorMode,0x00010001,0x00000002
+HKR,WinBio\Configurations\1,SystemSensor,0x00010001,0x00000001         
+HKR,WinBio\Configurations\1,VirtualSecureMode,0x00010001,0x00000001
+HKR,WinBio\Configurations\1,EngineAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\1,SensorAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\1,StorageAdapterBinary,,"MicroArrayMocAdapter.dll"
+HKR,WinBio\Configurations\1,VsmEngineAdapterBinary,,"WinBioVsmNullAdapter"
+HKR,WinBio\Configurations\1,VsmSensorAdapterBinary,,"WinBioVsmNullAdapter"
+HKR,WinBio\Configurations\1,VsmStorageAdapterBinary,,"WinBioVsmNullAdapter"
+HKR,WinBio\Configurations\1,DatabaseId,,"90508806-8172-4C04-B03F-DCB28DBEA104"
+
+[DatabaseAddReg]
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},BiometricType,0x00010001,0x00000008
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},Attributes,0x00010001,0x00000001
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},Format,,"00000000-0000-0000-0000-000000000000"
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},InitialSize,0x00010001,0x00000020
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},AutoCreate,0x00010001,0x00000001
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},AutoName,0x00010001,0x00000001
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},FilePath,,""
+HKLM,System\CurrentControlSet\Services\WbioSrvc\Databases\{90508806-8172-4C04-B03F-DCB28DBEA104},ConnectionString,,""
+
+[CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WUDFCoinstaller.dll"
+
+[DestinationDirs]
+UMDriverCopy=12,UMDF
+WinBioAdapterCopy=11,WinBioPlugins
+
+[UMDriverCopy]
+MicroArrayMocWbdi.dll,,,0x00004000
+
+[WinBioAdapterCopy]
+MicroArrayMocAdapter.dll,,,0x00004000
+
+[SignatureAttributes]
+MicroArrayMocWbdi.dll = SignatureAttributes.WindowsHello
+MicroArrayMocAdapter.dll = SignatureAttributes.WindowsHello
+ 
+[SignatureAttributes.WindowsHello]
+WindowsHello = true
+
+[Strings]
+ManufacturerName="Realtek Semiconductor"
+ClassName="Biometric Devices"
+DiskName = "RtsMocWBDI Installation Disk"
+WudfRdDisplayName="Windows Driver Foundation - User-mode Driver Framework Reflector"
+DeviceName="Realtek Moc Fingerprint"
